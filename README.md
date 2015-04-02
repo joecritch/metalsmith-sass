@@ -85,6 +85,10 @@ all imports own its own, but if you are getting `not found` errors, try manually
 Base path to use when evaluating `image-url()` functions in a stylesheet. Path will be prefixed to
 the value.
 
+### sourceMap
+
+Generate a source map for the outputted CSS. Adds a `sourceMappingURL` comment to your output file, along with a `[name].css.map` in the `outputDir`. Can be `true` or `false`. Default is `false`.
+
 ## Credits
 
 Thanks to [Segment.io](http://github.com/segmentio) for creating and open-sourcing

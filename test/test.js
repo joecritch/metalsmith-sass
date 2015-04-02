@@ -19,7 +19,8 @@
         join(__dirname, 'fixtures/dotfiles/build'),
         join(__dirname, 'fixtures/imports/build'),
         join(__dirname, 'fixtures/front-matter/build'),
-        join(__dirname, 'fixtures/invalid/build')
+        join(__dirname, 'fixtures/invalid/build'),
+        join(__dirname, 'fixtures/sourcemap/build')
       ];
       each(dirsToClean, rm, done);
     });
@@ -137,6 +138,25 @@
             done();
           });
       });
+    });
+
+    describe('the sourceMap option', function () {
+      it('should generate a source map', function (done) {
+        metalsmith(__dirname)
+          .source('fixtures/sourcemap/src')
+          .destination('fixtures/sourcemap/build')
+          .use(sass({
+            outputStyle: 'expanded',
+            sourceMap: true
+          }))
+          .build(function (err) {
+            if (err) {
+              throw err;
+            }
+            equal(join(__dirname, 'fixtures/sourcemap/build'), join(__dirname, 'fixtures/sourcemap/expected'));
+            done();
+          });
+      })
     });
   });
 }());
